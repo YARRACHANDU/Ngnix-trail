@@ -14,10 +14,10 @@ export default function RegisterPage() {
     e.preventDefault();
 
     try {
-      await axios.post(
-        `${process.env.NEXT_PUBLIC_API_URL}/api/auth/register`,
-        { email, password }
-      );
+      await axios.post("/api/register", {
+  email,
+  password,
+});
 
       alert("Registered successfully ✅");
       router.push("/login");
