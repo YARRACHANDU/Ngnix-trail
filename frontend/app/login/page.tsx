@@ -14,10 +14,10 @@ export default function LoginPage() {
     e.preventDefault();
 
     try {
-      const res = await axios.post<{ token: string }>(
-        `${process.env.NEXT_PUBLIC_API_URL}/api/auth/login`,
-        { email, password }
-      );
+      const res = await axios.post("/api/login", {
+  email,
+  password,
+});
 
       localStorage.setItem("token", res.data.token);
 
