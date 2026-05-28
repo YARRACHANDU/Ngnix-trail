@@ -1,0 +1,50 @@
+version: '3.9'
+
+services:
+
+  frontend:
+    build: ./frontend
+    container_name: mern-frontend
+
+    ports:
+      - "3000:3000"
+
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+
+    stdin_open: true
+    tty: true
+
+    depends_on:
+      - backend
+
+  backend:
+    build: ./backend-ProMax
+    container_name: mern-backend
+
+    ports:
+      - "5000:5000"
+
+    volumes:
+      - ./backend-ProMax:/app
+      - /app/node_modules
+    environment:
+      - PORT=5500
+      - MONGO_URI=mongodb+srv://bcfriends143:bcfriends143@cluster0.fiduiik.mongodb.net/?appName=Cluster0
+
+    depends_on:
+      - mongo
+
+  mongo:
+    image: mongo
+    container_name: mongo-db
+
+    ports:
+      - "27017:27017"
+
+    volumes:
+      - mongo-data:/data/db
+
+volumes:
+  mongo-data:
